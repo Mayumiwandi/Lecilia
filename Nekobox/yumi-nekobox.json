@@ -1,4 +1,4 @@
-// Create BY MAYUMI V1.0
+// Create BY MAYUMI V1.1
 {
     "log": {
         "disabled": false,
@@ -38,7 +38,7 @@
             {
                 "disable_cache": false,
                 "domain": [
-                    "family.cloudflare-dns.com", // jangan ganti bagian DNS
+                    "family.cloudflare-dns.com",
                     "dns.google",
                     "https://8.8.8.8",
                     "https://dns.alidns.com/dns-query",
@@ -141,12 +141,12 @@
             "type": "selector",
             "tag": "Proxy",
             "outbounds": [
-                "AKUN US Yumi",
-                "AKUN SG 1",
+                "AKUN US WARP 2",
+                "AKUN US WARP 1",
                 "AKUN SG WARP",
-                "AKUN US 2 Nautica",
-                "AKUN US 3",
-                "AKUN US 4",
+                "AKUN KS WARP",
+                "AKUN JP WARP",
+                "AKUN US WARP 3",
                 "AKUN INGGRIS",
                 "block"
             ],
@@ -162,8 +162,7 @@
             ],
             "interrupt_exist_connections": true,
             "tag": "ML-ID",
-            "type": "urltest",
-            "url": "http://connectivitycheck.gstatic.com/generate_204" // punya google
+            "type": "selector"
         },
         {
             "tag": "direct",
@@ -180,6 +179,109 @@
         {
             "tag": "dns-out",
             "type": "dns"
+        },
+        {
+            "tag": "AKUN US WARP 3",
+            "type": "trojan",
+            "server": "nontontv.vidio.com",
+            "server_port": 80,
+            "password": "d67e53eb-3e4e-4c31-8925-c6a4aab9dbbb",
+            "transport": {
+                "type": "ws",
+                "path": "/US651",
+                "headers": {
+                    "Host": "woless.kere.us.kg"
+                }
+            },
+            "multiplex": {
+                "enabled": false,
+                "protocol": "smux",
+                "max_streams": 32
+            }
+        },
+        {
+            "tag": "AKUN US WARP 2",
+            "type": "vless",
+            "server": "nontontv.vidio.com",
+            "server_port": 80,
+            "transport": {
+                "type": "ws",
+                "path": "/US136",
+                "headers": {
+                    "Host": "woless.kere.us.kg"
+                }
+            },
+            "multiplex": {
+                "enabled": false,
+                "protocol": "smux",
+                "max_streams": 32
+            },
+            "uuid": "1f1b5984-d679-4134-b2b1-4f44ff9c9fce",
+            "flow": "",
+            "packet_encoding": "xudp"
+        },
+        {
+            "tag": "AKUN US WARP 1",
+            "type": "vless",
+            "server": "nontontv.vidio.com",
+            "server_port": 80,
+            "transport": {
+                "type": "ws",
+                "path": "/US33",
+                "headers": {
+                    "Host": "woless.kere.us.kg"
+                }
+            },
+            "multiplex": {
+                "enabled": false,
+                "protocol": "smux",
+                "max_streams": 32
+            },
+            "uuid": "1ac6e204-0feb-4590-b801-804d96e89579",
+            "flow": "",
+            "packet_encoding": "xudp"
+        },
+        {
+            "tag": "AKUN KS WARP",
+            "type": "vless",
+            "server": "nontontv.vidio.com",
+            "server_port": 80,
+            "transport": {
+                "type": "ws",
+                "path": "/KR228",
+                "headers": {
+                    "Host": "woless.kere.us.kg"
+                }
+            },
+            "multiplex": {
+                "enabled": false,
+                "protocol": "smux",
+                "max_streams": 32
+            },
+            "uuid": "c09aaeb0-1c4e-4145-ad11-bc2db3b67f5f",
+            "flow": "",
+            "packet_encoding": "xudp"
+        },
+        {
+            "tag": "AKUN JP WARP",
+            "type": "vless",
+            "server": "nontontv.vidio.com",
+            "server_port": 80,
+            "transport": {
+                "type": "ws",
+                "path": "/JP56",
+                "headers": {
+                    "Host": "woless.kere.us.kg"
+                }
+            },
+            "multiplex": {
+                "enabled": false,
+                "protocol": "smux",
+                "max_streams": 32
+            },
+            "uuid": "5b9f348b-4251-41cf-ac9a-bc8ddfa06421",
+            "flow": "",
+            "packet_encoding": "xudp"
         },
         {
             "tag": "AKUN US Yumi",
