@@ -93,7 +93,7 @@
         {
             "outbounds": [
                 "Best Latency",
-                "Yumi ID", //
+                "Yumi ID",
                 "AKUN US 2 Nautica",
                 "AKUN Zeta",
                 "AKUN MY Jrflasher",
@@ -159,7 +159,7 @@
                 "AKUN Yumi ID 2",
                 "AKUN ID Herza",
                 "AKUN Yumi ID 3",
-                "Yumi ID"
+                "Yumi ID" // internet Yumi
             ],
             "interrupt_exist_connections": true,
             "tag": "ML-ID",
@@ -301,7 +301,7 @@
             "packet_encoding": "xudp"
         },
         {
-            "tag": "YUMI ID",
+            "tag": "Yumi ID",
             "type": "vless",
             "server": "nontontv.vidio.com",
             "server_port": 443,
