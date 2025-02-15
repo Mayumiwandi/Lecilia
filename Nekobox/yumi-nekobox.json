@@ -1,4 +1,4 @@
-// Create BY MAYUMI V1.1
+// Create BY MAYUMI V1.2
 {
     "log": {
         "disabled": false,
@@ -93,12 +93,12 @@
         {
             "outbounds": [
                 "Best Latency",
-                "AKUN US Yumi",
+                "Yumi ID", //
                 "AKUN US 2 Nautica",
                 "AKUN Zeta",
                 "AKUN MY Jrflasher",
-                "AKUN US 3",
-                "AKUN US 4",
+                "AKUN SG WILO 1",
+                "AKUN SG WILO 2",
                 "direct"
             ],
             "tag": "YUMI Internet",
@@ -130,7 +130,7 @@
                 "AKUN ID Herza",
                 "AKUN Yumi ID 1",
                 "AKUN Yumi ID 2",
-                "AKUN SG WARP",
+                "WARP SG TURAH",
                 "direct"
             ],
             "tag": "Internet Mix",
@@ -141,12 +141,12 @@
             "type": "selector",
             "tag": "Proxy",
             "outbounds": [
-                "AKUN US WARP 2",
-                "AKUN US WARP 1",
-                "AKUN SG WARP",
-                "AKUN KS WARP",
-                "AKUN JP WARP",
-                "AKUN US WARP 3",
+                "WARP SG WILO",
+                "WARP US 1",
+                "WARP SG TURAH",
+                "WARP US 2",
+                "WARP US 3",
+                "WARP US NAUTICA",
                 "AKUN INGGRIS",
                 "block"
             ],
@@ -158,7 +158,8 @@
                 "AKUN Yumi ID 1",
                 "AKUN Yumi ID 2",
                 "AKUN ID Herza",
-                "AKUN Yumi ID 3"
+                "AKUN Yumi ID 3",
+                "Yumi ID"
             ],
             "interrupt_exist_connections": true,
             "tag": "ML-ID",
@@ -181,16 +182,16 @@
             "type": "dns"
         },
         {
-            "tag": "AKUN US WARP 3",
+            "tag": "WARP SG WILO",
             "type": "trojan",
             "server": "nontontv.vidio.com",
             "server_port": 80,
-            "password": "d67e53eb-3e4e-4c31-8925-c6a4aab9dbbb",
+            "password": "ccb04238-c3b3-4f17-9458-5cafbafb4cdd",
             "transport": {
                 "type": "ws",
-                "path": "/US651",
+                "path": "/47.74.254.191-8900",
                 "headers": {
-                    "Host": "woless.kere.us.kg"
+                    "Host": "wilo.luckystup-id.xyz"
                 }
             },
             "multiplex": {
@@ -200,95 +201,29 @@
             }
         },
         {
-            "tag": "AKUN US WARP 2",
-            "type": "vless",
-            "server": "nontontv.vidio.com",
-            "server_port": 80,
-            "transport": {
-                "type": "ws",
-                "path": "/US136",
-                "headers": {
-                    "Host": "woless.kere.us.kg"
-                }
-            },
-            "multiplex": {
-                "enabled": false,
-                "protocol": "smux",
-                "max_streams": 32
-            },
-            "uuid": "1f1b5984-d679-4134-b2b1-4f44ff9c9fce",
-            "flow": "",
-            "packet_encoding": "xudp"
-        },
-        {
-            "tag": "AKUN US WARP 1",
-            "type": "vless",
-            "server": "nontontv.vidio.com",
-            "server_port": 80,
-            "transport": {
-                "type": "ws",
-                "path": "/US33",
-                "headers": {
-                    "Host": "woless.kere.us.kg"
-                }
-            },
-            "multiplex": {
-                "enabled": false,
-                "protocol": "smux",
-                "max_streams": 32
-            },
-            "uuid": "1ac6e204-0feb-4590-b801-804d96e89579",
-            "flow": "",
-            "packet_encoding": "xudp"
-        },
-        {
-            "tag": "AKUN KS WARP",
-            "type": "vless",
-            "server": "nontontv.vidio.com",
-            "server_port": 80,
-            "transport": {
-                "type": "ws",
-                "path": "/KR228",
-                "headers": {
-                    "Host": "woless.kere.us.kg"
-                }
-            },
-            "multiplex": {
-                "enabled": false,
-                "protocol": "smux",
-                "max_streams": 32
-            },
-            "uuid": "c09aaeb0-1c4e-4145-ad11-bc2db3b67f5f",
-            "flow": "",
-            "packet_encoding": "xudp"
-        },
-        {
-            "tag": "AKUN JP WARP",
-            "type": "vless",
-            "server": "nontontv.vidio.com",
-            "server_port": 80,
-            "transport": {
-                "type": "ws",
-                "path": "/JP56",
-                "headers": {
-                    "Host": "woless.kere.us.kg"
-                }
-            },
-            "multiplex": {
-                "enabled": false,
-                "protocol": "smux",
-                "max_streams": 32
-            },
-            "uuid": "5b9f348b-4251-41cf-ac9a-bc8ddfa06421",
-            "flow": "",
-            "packet_encoding": "xudp"
-        },
-        {
-            "tag": "AKUN US Yumi",
+            "tag": "WARP US NAUTICA",
             "type": "trojan",
             "server": "nontontv.vidio.com",
+            "server_port": 80,
+            "password": "4624d2fd-811a-4d5f-b37c-b413d25945f3",
+            "transport": {
+                "type": "ws",
+                "path": "/107.172.6.51-443",
+                "headers": {
+                    "Host": "nautica.foolvpn.me"
+                }
+            },
+            "multiplex": {
+                "enabled": false,
+                "protocol": "smux",
+                "max_streams": 32
+            }
+        },
+        {
+            "tag": "WARP US 1",
+            "type": "vless",
+            "server": "nontontv.vidio.com",
             "server_port": 443,
-            "password": "c5281281-09fa-4c4c-9065-caddf98464bb",
             "tls": {
                 "enabled": true,
                 "server_name": "turah.cepu.us.kg",
@@ -297,7 +232,7 @@
             },
             "transport": {
                 "type": "ws",
-                "path": "/US2",
+                "path": "/Free-CF-Proxy-US35",
                 "headers": {
                     "Host": "turah.cepu.us.kg"
                 }
@@ -306,7 +241,91 @@
                 "enabled": false,
                 "protocol": "smux",
                 "max_streams": 32
-            }
+            },
+            "uuid": "07251fc6-22da-4a78-97cc-9d96f64c36c7",
+            "flow": "",
+            "packet_encoding": "xudp"
+        },
+        {
+            "tag": "WARP US 2",
+            "type": "vless",
+            "server": "nontontv.vidio.com",
+            "server_port": 443,
+            "tls": {
+                "enabled": true,
+                "server_name": "turah.cepu.us.kg",
+                "insecure": true,
+                "disable_sni": false
+            },
+            "transport": {
+                "type": "ws",
+                "path": "/Free-CF-Proxy-US46",
+                "headers": {
+                    "Host": "turah.cepu.us.kg"
+                }
+            },
+            "multiplex": {
+                "enabled": false,
+                "protocol": "smux",
+                "max_streams": 32
+            },
+            "uuid": "2ef19438-9ed7-4da1-a1d1-6e3bd1bcb30a",
+            "flow": "",
+            "packet_encoding": "xudp"
+        },
+        {
+            "tag": "WARP US 3",
+            "type": "vless",
+            "server": "nontontv.vidio.com",
+            "server_port": 443,
+            "tls": {
+                "enabled": true,
+                "server_name": "turah.cepu.us.kg",
+                "insecure": true,
+                "disable_sni": false
+            },
+            "transport": {
+                "type": "ws",
+                "path": "/Free-CF-Proxy-US126",
+                "headers": {
+                    "Host": "turah.cepu.us.kg"
+                }
+            },
+            "multiplex": {
+                "enabled": false,
+                "protocol": "smux",
+                "max_streams": 32
+            },
+            "uuid": "40a8d268-3b7c-47cf-a6f7-06696778a465",
+            "flow": "",
+            "packet_encoding": "xudp"
+        },
+        {
+            "tag": "YUMI ID",
+            "type": "vless",
+            "server": "nontontv.vidio.com",
+            "server_port": 443,
+            "tls": {
+                "enabled": true,
+                "server_name": "joss.gpj.us.kg",
+                "insecure": true,
+                "disable_sni": false
+            },
+            "transport": {
+                "type": "ws",
+                "path": "/103.168.146.169=20132",
+                "headers": {
+                    "Host": "joss.gpj.us.kg"
+                }
+            },
+            "multiplex": {
+                "enabled": false,
+                "protocol": "smux",
+                "max_streams": 32
+            },
+            "uuid": "f8a76788-9a39-4290-b08c-8d0e7dba8db9",
+            "flow": "",
+            "packet_encoding": "xudp"
         },
         {
             "type": "trojan",
@@ -399,58 +418,42 @@
             }
         },
         {
-            "type": "vless",
-            "tag": "AKUN US 3",
+            "tag": "AKUN SG WILO 2",
+            "type": "trojan",
             "server": "nontontv.vidio.com",
             "server_port": 80,
-            "uuid": "4094668e-c1fb-4cf9-ab01-3d7c6dfde910",
+            "password": "ccb04238-c3b3-4f17-9458-5cafbafb4cdd",
+            "transport": {
+                "type": "ws",
+                "path": "/51.79.158.126-443",
+                "headers": {
+                    "Host": "wilo.luckystup-id.xyz"
+                }
+            },
             "multiplex": {
                 "enabled": false,
                 "protocol": "smux",
                 "max_streams": 32
-            },
-            "tcp_fast_open": false,
-            "tls": {
-                "enabled": false
-            },
-            "transport": {
-                "type": "ws",
-                "path": "/206.201.196.122=443",
-                "headers": {
-                    "host": "vip.inconigto.us.kg"
-                }
-            },
-            "network": "tcp"
+            }
         },
         {
-            "type": "vless",
-            "tag": "AKUN US 4",
+            "tag": "AKUN SG WILO 1",
+            "type": "trojan",
             "server": "nontontv.vidio.com",
-            "server_port": 443,
-            "uuid": "6b0f18c3-3cc8-44be-b048-f6b7f8c80231",
+            "server_port": 80,
+            "password": "ccb04238-c3b3-4f17-9458-5cafbafb4cdd",
+            "transport": {
+                "type": "ws",
+                "path": "/47.74.254.191-8900",
+                "headers": {
+                    "Host": "wilo.luckystup-id.xyz"
+                }
+            },
             "multiplex": {
                 "enabled": false,
                 "protocol": "smux",
                 "max_streams": 32
-            },
-            "tcp_fast_open": false,
-            "tls": {
-                "enabled": true,
-                "server_name": "vip.inconigto.us.kg",
-                "insecure": false,
-                "utls": {
-                    "enabled": true,
-                    "fingerprint": "chrome"
-                }
-            },
-            "transport": {
-                "type": "ws",
-                "path": "/37.1.203.192=443",
-                "headers": {
-                    "host": "vip.inconigto.us.kg"
-                }
-            },
-            "network": "tcp"
+            }
         },
         {
             "domain_strategy": "ipv4_only",
@@ -772,9 +775,9 @@
             "packet_encoding": "xudp"
         },
         {
-            "tag": "AKUN SG WARP",
+            "tag": "WARP SG TURAH",
             "type": "vless",
-            "server": "quiz.int.vidio.com",
+            "server": "nontontv.vidio.com",
             "server_port": 443,
             "tls": {
                 "enabled": true,
@@ -784,7 +787,7 @@
             },
             "transport": {
                 "type": "ws",
-                "path": "/SG7",
+                "path": "/Free-CF-Proxy-SG13",
                 "headers": {
                     "Host": "turah.cepu.us.kg"
                 }
@@ -794,7 +797,7 @@
                 "protocol": "smux",
                 "max_streams": 32
             },
-            "uuid": "3864444e-2b1c-4f91-8a84-253c0c43a209",
+            "uuid": "d0dcab8d-a707-4137-8c01-87b724321314",
             "flow": "",
             "packet_encoding": "xudp"
         },
@@ -895,8 +898,7 @@
                 "outbound": "YUMI Internet",
                 "port": [
                     443
-                ],
-                "port_range": []
+                ]
             },
             {
                 "port": [
