@@ -1,4 +1,4 @@
-// Create BY MAYUMI V1.2
+// Create BY MAYUMI V1.3 16 Feb 2025
 {
     "log": {
         "disabled": false,
@@ -130,7 +130,7 @@
                 "AKUN ID Herza",
                 "AKUN Yumi ID 1",
                 "AKUN Yumi ID 2",
-                "WARP SG TURAH",
+                "WARP SG Nautica",
                 "direct"
             ],
             "tag": "Internet Mix",
@@ -143,7 +143,7 @@
             "outbounds": [
                 "WARP SG WILO",
                 "WARP US 1",
-                "WARP SG TURAH",
+                "WARP SG Nautica",
                 "WARP US 2",
                 "WARP US 3",
                 "WARP US NAUTICA",
@@ -221,30 +221,28 @@
         },
         {
             "tag": "WARP US 1",
-            "type": "vless",
+            "type": "trojan",
             "server": "nontontv.vidio.com",
             "server_port": 443,
+            "password": "c3774d86-fc3d-4831-930a-d4260cc85dd3",
             "tls": {
                 "enabled": true,
-                "server_name": "turah.cepu.us.kg",
+                "server_name": "nautica.foolvpn.me",
                 "insecure": true,
                 "disable_sni": false
             },
             "transport": {
                 "type": "ws",
-                "path": "/Free-CF-Proxy-US35",
+                "path": "/107.173.171.241-443",
                 "headers": {
-                    "Host": "turah.cepu.us.kg"
+                    "Host": "nautica.foolvpn.me"
                 }
             },
             "multiplex": {
                 "enabled": false,
                 "protocol": "smux",
                 "max_streams": 32
-            },
-            "uuid": "07251fc6-22da-4a78-97cc-9d96f64c36c7",
-            "flow": "",
-            "packet_encoding": "xudp"
+            }
         },
         {
             "tag": "WARP US 2",
@@ -253,15 +251,15 @@
             "server_port": 443,
             "tls": {
                 "enabled": true,
-                "server_name": "turah.cepu.us.kg",
+                "server_name": "yumi.yumicftigarun.web.id",
                 "insecure": true,
                 "disable_sni": false
             },
             "transport": {
                 "type": "ws",
-                "path": "/Free-CF-Proxy-US46",
+                "path": "/JP75",
                 "headers": {
-                    "Host": "turah.cepu.us.kg"
+                    "Host": "yumi.yumicftigarun.web.id"
                 }
             },
             "multiplex": {
@@ -269,7 +267,7 @@
                 "protocol": "smux",
                 "max_streams": 32
             },
-            "uuid": "2ef19438-9ed7-4da1-a1d1-6e3bd1bcb30a",
+            "uuid": "368a0630-1188-4bc7-afb3-86b7c7f8f814",
             "flow": "",
             "packet_encoding": "xudp"
         },
@@ -280,15 +278,15 @@
             "server_port": 443,
             "tls": {
                 "enabled": true,
-                "server_name": "turah.cepu.us.kg",
+                "server_name": "yumi.yumicftigarun.web.id",
                 "insecure": true,
                 "disable_sni": false
             },
             "transport": {
                 "type": "ws",
-                "path": "/Free-CF-Proxy-US126",
+                "path": "/KR322",
                 "headers": {
-                    "Host": "turah.cepu.us.kg"
+                    "Host": "yumi.yumicftigarun.web.id"
                 }
             },
             "multiplex": {
@@ -296,7 +294,7 @@
                 "protocol": "smux",
                 "max_streams": 32
             },
-            "uuid": "40a8d268-3b7c-47cf-a6f7-06696778a465",
+            "uuid": "b886f8a7-0ca5-4ba4-9cf5-5ad53855c3e9",
             "flow": "",
             "packet_encoding": "xudp"
         },
@@ -734,62 +732,45 @@
         },
         {
             "tag": "AKUN Yumi ID 1",
-            "type": "vless",
-            "server": "quiz.int.vidio.com",
-            "server_port": 80,
-            "transport": {
-                "type": "ws",
-                "path": "/172.232.239.249=587",
-                "headers": {
-                    "Host": "inconigto.us.kg"
-                }
-            },
-            "multiplex": {
-                "enabled": false,
-                "protocol": "smux",
-                "max_streams": 32
-            },
-            "uuid": "f0357ee1-be8f-4f86-be37-725dafb117b5",
-            "flow": "",
-            "packet_encoding": "xudp"
-        },
-        {
-            "tag": "AKUN Yumi ID 2",
-            "type": "vless",
-            "server": "quiz.int.vidio.com",
-            "server_port": 80,
-            "transport": {
-                "type": "ws",
-                "path": "/ID4",
-                "headers": {
-                    "Host": "mstkkee3.us.kg"
-                }
-            },
-            "multiplex": {
-                "enabled": false,
-                "protocol": "smux",
-                "max_streams": 32
-            },
-            "uuid": "63c6d1e5-8252-4187-ad46-1fdb91baf6c5",
-            "flow": "",
-            "packet_encoding": "xudp"
-        },
-        {
-            "tag": "WARP SG TURAH",
-            "type": "vless",
+            "type": "trojan",
             "server": "nontontv.vidio.com",
             "server_port": 443,
+            "password": "53c427f1-09b6-477a-8a60-7e36df70d8da",
             "tls": {
                 "enabled": true,
-                "server_name": "turah.cepu.us.kg",
+                "server_name": "yumi.yumicftigarun.web.id",
                 "insecure": true,
                 "disable_sni": false
             },
             "transport": {
                 "type": "ws",
-                "path": "/Free-CF-Proxy-SG13",
+                "path": "/ID1",
                 "headers": {
-                    "Host": "turah.cepu.us.kg"
+                    "Host": "yumi.yumicftigarun.web.id"
+                }
+            },
+            "multiplex": {
+                "enabled": false,
+                "protocol": "smux",
+                "max_streams": 32
+            }
+        },
+        {
+            "tag": "AKUN Yumi ID 2",
+            "type": "vless",
+            "server": "nontontv.vidio.com",
+            "server_port": 443,
+            "tls": {
+                "enabled": true,
+                "server_name": "yumi.yumicftigarun.web.id",
+                "insecure": true,
+                "disable_sni": false
+            },
+            "transport": {
+                "type": "ws",
+                "path": "/ID3",
+                "headers": {
+                    "Host": "yumi.yumicftigarun.web.id"
                 }
             },
             "multiplex": {
@@ -797,9 +778,28 @@
                 "protocol": "smux",
                 "max_streams": 32
             },
-            "uuid": "d0dcab8d-a707-4137-8c01-87b724321314",
+            "uuid": "9d540e93-c089-4020-9560-bb6c6423ab85",
             "flow": "",
             "packet_encoding": "xudp"
+        },
+        {
+            "tag": "WARP SG Nautica",
+            "type": "trojan",
+            "server": "nontontv.vidio.com",
+            "server_port": 80,
+            "password": "faf4a955-8438-4afc-85fe-6814f4923489",
+            "transport": {
+                "type": "ws",
+                "path": "/138.2.74.219-28616",
+                "headers": {
+                    "Host": "nautica.foolvpn.me"
+                }
+            },
+            "multiplex": {
+                "enabled": false,
+                "protocol": "smux",
+                "max_streams": 32
+            }
         },
         {
             "tag": "AKUN INGGRIS",
