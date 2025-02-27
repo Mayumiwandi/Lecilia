@@ -104,10 +104,10 @@
             ],
             "tag": "Internet",
             "type": "urltest",
+            "interval": "1m0s",
             "url": "http://connectivitycheck.gstatic.com/generate_204" // kalau mau langung di pilih dengan ping terkecil gunakan url test
         },
         {
-            "interval": "1m0s",
             "outbounds": [
                 "direct",
                 "block",
