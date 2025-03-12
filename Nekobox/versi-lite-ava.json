@@ -102,8 +102,8 @@
                 "Yumi-Internet"
             ],
             "tag": "Internet",
-            "type": "selector",
-            "interval": "1m0s"
+            "type": "selector"
+        
         },
         {
             "outbounds": [
