@@ -211,7 +211,7 @@
         {
             "tag": "Free vmess",
             "type": "vmess",
-            "server": "sg.xsm.web.id",
+            "server": "ava.game.naver.com",
             "server_port": 80,
             "uuid": "50a8d380-ba4a-49f7-be6d-64b2a987e4da",
             "security": "auto",
