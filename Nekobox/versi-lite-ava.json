@@ -1,5 +1,4 @@
-// Create BY MAYUMI  lite  12 maret 2025
-// NOte block tidak di pakai lagi pada singbox versi 11
+// Create BY MAYUMI  lite  16 maret 2025
 {
     "log": {
         "disabled": false,
@@ -92,45 +91,45 @@
     "outbounds": [
         {
             "outbounds": [
-                "Best Latency",
-                "PT NEWTON CIPTA INFORMATIKA ID",
-                "Nautica ID",
-                "Amazon.com ID",
-                "Yumi SG",
-                "Akun Tele ID",
-                "Yumi ID",
+                "Best-Latency",
+                "ID Data Center nautica",
+                "Akamai nautica",
+                "Orecal Cloud nautica",
+                "Prod PT Pusat Media Indonesia",
                 "Yumi-Internet"
             ],
             "tag": "Internet",
-            "type": "selector"
-        
-        },
-        {
-            "outbounds": [
-                "direct",
-                "block",
-                "PT NEWTON CIPTA INFORMATIKA ID",
-                "Nautica ID",
-                "Amazon.com ID",
-                "Yumi SG",
-                "Akun Tele ID",
-                "Yumi ID",
-                "Yumi-Internet"
-            ],
-            "tag": "Best Latency",
-            "type": "selector"
-        },
-        {
             "type": "urltest",
-            "tag": "Yumi-Internet",
-            "outbounds": [
-                "(ID)PT Pusat Media Indonesia",
-                "(ID)PT Telkom Indonesia"
-            ],
             "url": "http://www.gstatic.com/generate_204",
             "idle_timeout": "5m",
             "interval": "1m",
             "tolerance": 50
+        },
+        {
+            "outbounds": [
+                "freeTrojan ws",
+                "Free vmess",
+                "ID Akamai Connected Cloud",
+                "(SG) OVH SAS",
+                "ID PT 0Telkom Indonesia",
+                "Yumi-Internet"
+            ],
+            "tag": "Best Latency",
+            "type": "urltest",
+            "url": "http://www.gstatic.com/generate_204",
+            "idle_timeout": "5m",
+            "interval": "1m",
+            "tolerance": 50
+        },
+        {
+            "type": "selector",
+            "tag": "Yumi-Internet",
+            "outbounds": [
+                "Converge ID [Yumi]",
+                "US Cloudflare Warp",
+                "(GB)Cloudflare Warp",
+                "ID PT 0Telkom Indonesia"
+            ]
         },
         {
             "tag": "direct",
@@ -141,29 +140,44 @@
             "type": "direct"
         },
         {
-            "tag": "block",
-            "type": "block"
-        },
-        {
             "tag": "dns-out",
             "type": "dns"
         },
         {
-            "tag": "Yumi ID",
-            "type": "vless",
+            "tag": "Converge ID [Yumi]",
+            "type": "trojan",
             "server": "ava.game.naver.com",
             "server_port": 443,
+            "password": "c41327e8-8e46-4c84-8de0-0530ee2fd640",
             "tls": {
                 "enabled": true,
-                "server_name": "yumicftigarun.web.id",
+                "server_name": "nautica.vokip29018.workers.dev",
                 "insecure": true,
                 "disable_sni": false
             },
             "transport": {
                 "type": "ws",
-                "path": "/ID1",
+                "path": "/203.194.112.119-2053",
                 "headers": {
-                    "Host": "yumicftigarun.web.id"
+                    "Host": "nautica.vokip29018.workers.dev"
+                }
+            },
+            "multiplex": {
+                "enabled": false,
+                "protocol": "smux",
+                "max_streams": 32
+            }
+        },
+        {
+            "tag": "US Cloudflare Warp",
+            "type": "vless",
+            "server": "ava.game.naver.com",
+            "server_port": 80,
+            "transport": {
+                "type": "ws",
+                "path": "/74.48.221.141-26255",
+                "headers": {
+                    "Host": "cfwaio.proxybox.us.kg"
                 }
             },
             "multiplex": {
@@ -171,21 +185,21 @@
                 "protocol": "smux",
                 "max_streams": 32
             },
-            "uuid": "981efeca-1c7a-46ae-8f9a-5f35f3d30b5e",
+            "uuid": "199fa0ac-6dff-4844-9371-5fc7c6b8b93c",
             "flow": "",
             "packet_encoding": "xudp"
         },
         {
-            "tag": "Akun Tele ID",
+            "tag": "ID Akamai Connected Cloud",
             "type": "trojan",
             "server": "ava.game.naver.com",
             "server_port": 80,
-            "password": "aaaaaaa1-bbbb-4ccc-accc-eeeeeeeeeee1",
+            "password": "34d414b8-f583-4455-bc71-9172e652b197",
             "transport": {
                 "type": "ws",
-                "path": "/Free/TG-at-XionAlva/36.95.152.58-12137",
+                "path": "/172.232.239.151-587",
                 "headers": {
-                    "Host": "free.gegegeming.My.id"
+                    "Host": "cfwaio.proxybox.us.kg"
                 }
             },
             "multiplex": {
@@ -195,21 +209,61 @@
             }
         },
         {
-            "tag": "Yumi SG",
+            "tag": "Free vmess",
+            "type": "vmess",
+            "server": "sg.xsm.web.id",
+            "server_port": 80,
+            "uuid": "50a8d380-ba4a-49f7-be6d-64b2a987e4da",
+            "security": "auto",
+            "alter_id": 0,
+            "transport": {
+                "type": "ws",
+                "path": "/vmess",
+                "headers": {
+                    "Host": "sg.xsm.web.id"
+                }
+            },
+            "multiplex": {
+                "enabled": false,
+                "protocol": "smux",
+                "max_streams": 32
+            }
+        },
+        {
+            "tag": "freeTrojan ws",
+            "type": "trojan",
+            "server": "ava.game.naver.com",
+            "server_port": 80,
+            "password": "Eq8xeA9XL2nE9ZfU0zin9A",
+            "transport": {
+                "type": "ws",
+                "path": "/trojan",
+                "headers": {
+                    "Host": "sg.xsm.web.id"
+                }
+            },
+            "multiplex": {
+                "enabled": false,
+                "protocol": "smux",
+                "max_streams": 32
+            }
+        },
+        {
+            "tag": "(SG) OVH SAS",
             "type": "vless",
             "server": "ava.game.naver.com",
             "server_port": 443,
             "tls": {
                 "enabled": true,
-                "server_name": "yumicftigarun.web.id",
+                "server_name": "violetvpn.biz.id",
                 "insecure": true,
                 "disable_sni": false
             },
             "transport": {
                 "type": "ws",
-                "path": "/SG7",
+                "path": "/sg-ovh",
                 "headers": {
-                    "Host": "yumicftigarun.web.id"
+                    "Host": "violetvpn.biz.id"
                 }
             },
             "multiplex": {
@@ -217,41 +271,85 @@
                 "protocol": "smux",
                 "max_streams": 32
             },
-            "uuid": "b459a924-d01e-41ff-a8db-459f6dd31428",
+            "uuid": "16901367-0587-48d2-bcbd-4948988e836b",
             "flow": "",
             "packet_encoding": "xudp"
         },
         {
-            "tag": "Amazon.com ID",
-            "type": "trojan",
+            "tag": "(GB)Cloudflare Warp",
+            "type": "vless",
             "server": "ava.game.naver.com",
             "server_port": 443,
-            "password": "8fcefd12-b917-4130-a17b-f9da8650708f",
             "tls": {
                 "enabled": true,
-                "server_name": "nuclear.us.kg",
+                "server_name": "free.aloalo.my.id",
                 "insecure": true,
                 "disable_sni": false
             },
             "transport": {
                 "type": "ws",
-                "path": "/108.136.205.136:443",
+                "path": "/Free/TG-at-XionAlva/185.127.17.163-4903",
                 "headers": {
-                    "Host": "nuclear.us.kg"
+                    "Host": "free.aloalo.my.id"
                 }
             },
             "multiplex": {
                 "enabled": false,
                 "protocol": "smux",
                 "max_streams": 32
-            }
+            },
+            "uuid": "aaaaaaa1-bbbb-4ccc-accc-eeeeeeeeeee1",
+            "flow": "",
+            "packet_encoding": "xudp"
         },
         {
-            "tag": "Nautica ID",
+            "tag": "ID PT 0Telkom Indonesia",
+            "type": "vless",
+            "server": "ava.game.naver.com",
+            "server_port": 80,
+            "transport": {
+                "type": "ws",
+                "path": "/Free/TG-at-BitzBlack/36.95.152.58-12137",
+                "headers": {
+                    "Host": "free.bansos.biz.id"
+                }
+            },
+            "multiplex": {
+                "enabled": false,
+                "protocol": "smux",
+                "max_streams": 32
+            },
+            "uuid": "aaaaaaa1-bbbb-4ccc-accc-eeeeeeeeeee1",
+            "flow": "",
+            "packet_encoding": "xudp"
+        },
+        {
+            "tag": "Prod PT Pusat Media Indonesia",
+            "type": "vless",
+            "server": "ava.game.naver.com",
+            "server_port": 80,
+            "transport": {
+                "type": "ws",
+                "path": "/free/103.6.207.108:8080",
+                "headers": {
+                    "Host": "nuclear.biz.id"
+                }
+            },
+            "multiplex": {
+                "enabled": false,
+                "protocol": "smux",
+                "max_streams": 32
+            },
+            "uuid": "95a55b4d-41a4-4f0c-8185-2ad0dd2b7d33",
+            "flow": "",
+            "packet_encoding": "xudp"
+        },
+        {
+            "tag": "Orecal Cloud nautica",
             "type": "trojan",
             "server": "ava.game.naver.com",
             "server_port": 443,
-            "password": "b5596e67-bc8d-4dc0-b3be-95966f6b21b9",
+            "password": "4cc43c65-de8d-4d44-8baf-7872b9267efd",
             "tls": {
                 "enabled": true,
                 "server_name": "nautica.foolvpn.me",
@@ -260,7 +358,7 @@
             },
             "transport": {
                 "type": "ws",
-                "path": "/203.194.112.119-2053",
+                "path": "/146.235.18.248-45137",
                 "headers": {
                     "Host": "nautica.foolvpn.me"
                 }
@@ -272,22 +370,49 @@
             }
         },
         {
-            "tag": "PT NEWTON CIPTA INFORMATIKA ID",
-            "type": "trojan",
+            "tag": "Akamai nautica",
+            "type": "vless",
             "server": "ava.game.naver.com",
             "server_port": 443,
-            "password": "02d8d187-9d42-41a7-98e9-c8fc8e000ed5",
             "tls": {
                 "enabled": true,
-                "server_name": "nuclear.us.kg",
+                "server_name": "nautica.foolvpn.me",
                 "insecure": true,
                 "disable_sni": false
             },
             "transport": {
                 "type": "ws",
-                "path": "/103.63.101.10:443",
+                "path": "/172.232.239.151-587",
                 "headers": {
-                    "Host": "nuclear.us.kg"
+                    "Host": "nautica.foolvpn.me"
+                }
+            },
+            "multiplex": {
+                "enabled": false,
+                "protocol": "smux",
+                "max_streams": 32
+            },
+            "uuid": "bd865a1b-94aa-4d98-8059-f11c4b21e82e",
+            "flow": "",
+            "packet_encoding": "xudp"
+        },
+        {
+            "tag": "ID Data Center nautica",
+            "type": "trojan",
+            "server": "ava.game.naver.com",
+            "server_port": 443,
+            "password": "bd865a1b-94aa-4d98-8059-f11c4b21e82e",
+            "tls": {
+                "enabled": true,
+                "server_name": "nautica.foolvpn.me",
+                "insecure": true,
+                "disable_sni": false
+            },
+            "transport": {
+                "type": "ws",
+                "path": "/203.194.112.119-8443",
+                "headers": {
+                    "Host": "nautica.foolvpn.me"
                 }
             },
             "multiplex": {
@@ -295,60 +420,6 @@
                 "protocol": "smux",
                 "max_streams": 32
             }
-        },
-        {
-            "tag": "(ID)PT Telkom Indonesia",
-            "type": "vless",
-            "server": "ava.game.naver.com",
-            "server_port": 443,
-            "tls": {
-                "enabled": true,
-                "server_name": "yumicftigarun.web.id",
-                "insecure": true,
-                "disable_sni": false
-            },
-            "transport": {
-                "type": "ws",
-                "path": "/ID3",
-                "headers": {
-                    "Host": "yumicftigarun.web.id"
-                }
-            },
-            "multiplex": {
-                "enabled": false,
-                "protocol": "smux",
-                "max_streams": 32
-            },
-            "uuid": "52df4b6e-9344-48e8-b6e4-56d8e3b251da",
-            "flow": "",
-            "packet_encoding": "xudp"
-        },
-        {
-            "tag": "(ID)PT Pusat Media Indonesia",
-            "type": "vless",
-            "server": "ava.game.naver.com",
-            "server_port": 443,
-            "tls": {
-                "enabled": true,
-                "server_name": "yumicftigarun.web.id",
-                "insecure": true,
-                "disable_sni": false
-            },
-            "transport": {
-                "type": "ws",
-                "path": "/ID2",
-                "headers": {
-                    "Host": "yumicftigarun.web.id"
-                }
-            },
-            "multiplex": {
-                "enabled": false,
-                "protocol": "smux",
-                "max_streams": 32
-            },
-            "uuid": "c54cb42e-95ad-42dd-ad8a-46c0d3a6bc82",
-            "flow": "",
-            "packet_encoding": "xudp"
         }
     ],
     "route": {
@@ -365,6 +436,62 @@
                     "dns-in"
                 ],
                 "outbound": "dns-out"
+            },
+            {
+                "domain_suffix": [
+                    "avtub.net",
+                    "avtubofficial.site",
+                    "sangelink.com.de",
+                    "vstream.id"
+                ],
+                "outbound": "Yumi-Internet"
+            },
+            {
+                "domain_suffix": [
+                    "akmcdn.ml.youngjoygame.com",
+                    "akmpicture.youngjoygame.com",
+                    "mobilelegends.com",
+                    "ml.aihelp.net",
+                    "report.ml.youngjoygame.com",
+                    "login.ml.youngjoygame.com",
+                    "newlogin.ml.mlbangbang.com",
+                    "newlogin.ml.youngjoygame.com",
+                    "61.moontonsafe.com",
+                    "proxytest89.moonton.org",
+                    "moontonsafe.com"
+                ],
+                "network": "udp",
+                "port": [
+                    53,
+                    443,
+                    30071,
+                    30021,
+                    80,
+                    30190,
+                    5505,
+                    5555,
+                    6789,
+                    2702,
+                    3702,
+                    8443,
+                    9120,
+                    9992,
+                    10003
+                ],
+                "port_range": [
+                    "4001:4009",
+                    "5000:5221",
+                    "5224:5241",
+                    "5243:5287",
+                    "5289:5352",
+                    "5354:5509",
+                    "5517:5529",
+                    "5551:5559",
+                    "5601:5700",
+                    "9000:9010",
+                    "30000:30300"
+                ],
+                "outbound": "Internet"
             },
             {
                 "port": [
