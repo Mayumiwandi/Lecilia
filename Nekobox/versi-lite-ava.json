@@ -91,7 +91,7 @@
     "outbounds": [
         {
             "outbounds": [
-                "Best Latency",
+                "SG Cloudflare WARP Yumi",
                 "ID Data Center nautica",
                 "Akamai nautica",
                 "Orecal Cloud nautica",
@@ -143,6 +143,31 @@
             "tag": "dns-out",
             "type": "dns"
         },
+        {
+      "tag": "SG Cloudflare WARP Yumi",
+      "type": "trojan",
+      "server": "ava.game.naver.com",
+      "server_port": 443,
+      "password": "59124e7d-18fe-4262-9dfd-78091a7d0220",
+      "tls": {
+        "enabled": true,
+        "server_name": "nautica.vokip29018.workers.dev",
+        "insecure": true,
+        "disable_sni": false
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/138.2.74.219-28616",
+        "headers": {
+          "Host": "nautica.vokip29018.workers.dev"
+        }
+      },
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      }
+    },
         {
             "tag": "Converge ID [Yumi]",
             "type": "trojan",
