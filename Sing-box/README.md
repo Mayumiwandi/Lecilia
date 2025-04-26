@@ -5,3 +5,6 @@
 
 - Abpindo 
   https://raw.githubusercontent.com/hillz2/openclash_adblock/refs/heads/main/abpindo.yaml
+
+- Oisd-smal
+  https://raw.githubusercontent.com/hillz2/openclash_adblock/refs/heads/main/oisd_small.yaml
