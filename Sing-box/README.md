@@ -11,3 +11,5 @@
 
 - Adam4wan
   https://raw.githubusercontent.com/adam4wan/Adlist-Pihole-Indonesia/refs/heads/main/blocklistJUNKPiHoleIndonesia_byAdam4wan.txt
+- Porn Indo block
+  https://raw.githubusercontent.com/adam4wan/Adlist-Pihole-Indonesia/refs/heads/main/blocklistPORNOPiHoleIndonesia_byAdam4wan.txt
