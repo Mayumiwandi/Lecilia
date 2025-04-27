@@ -1,0 +1,760 @@
+{
+  "log": {
+    "level": "warn",
+    "output": "Nekobox.log",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "google-dns",
+        "address": "tls://dns.google",
+        "address_resolver": "dns-local",
+        "address_strategy": "prefer_ipv4",
+        "strategy": "ipv4_only",
+        "detour": "Latency"
+      },
+      {
+        "tag": "dns-local",
+        "address": "local",
+        "address_resolver": "local",
+        "address_strategy": "prefer_ipv4",
+        "strategy": "ipv4_only"
+      },
+      {
+        "tag": "block-dns",
+        "address": "rcode://success",
+        "detour": "block"
+      }
+    ],
+    "rules": [
+      {
+        "domain": [
+          "quiz.int.vidio.com",
+          "nontontv.vidio.com",
+          "ava.game.naver.com",
+          "investor.fb.com",
+          "quiz.vidio.com",
+          "investors.spotify.com",
+          "nontontv.vidio.com"
+        ],
+        "server": "dns-local"
+      },
+      {"domain": [
+          "yumiwolker.mayumiyui.workers.dev",
+          "nautica.vokip29018.workers.dev",
+          "nuclear.us.kg",
+          "nautica.foolvpn.me",
+          "yumicftigarun.web.id",
+          "violetvpn.biz.id",
+          "akun.bansos.biz.id"
+        ],
+        "server": "google-dns"
+      },
+      {
+        "outbound": "Latency",
+        "server": "google-dns",
+        "rewrite_ttl": 600
+      },
+      {
+        "outbound": "Region",
+        "server": "google-dns",
+        "rewrite_ttl": 600
+      },
+      {
+        "outbound": "Ads-Ops",
+        "server": "block-dns"
+      }
+    ],
+    "strategy": "ipv4_only",
+    "independent_cache": true
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "interface_name": "tun0",
+      "mtu": 1490,
+      "address": [
+        "172.18.0.1/30",
+        "fdfe:dcba:9876::1/126"
+      ],
+      "auto_route": true,
+      "strict_route": true,
+      "stack": "gvisor",
+      "sniff": true,
+      "endpoint_independent_nat": true
+    },
+    {
+      "type": "mixed",
+      "tag": "mixed-in",
+      "listen": "0.0.0.0",
+      "listen_port": 2080,
+      "sniff": true,
+      "sniff_override_destination": true
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "selector",
+      "tag": "Internet",
+      "outbounds": [
+        "Latency",
+        "Region",
+        "Load-balance"
+      ],
+      "default": "Latency"
+    },
+    {
+      "type": "urltest",
+      "tag": "Latency",
+      "outbounds": [
+        "ID Amazon Nautica",
+        "ID Akamai Nautica",
+        "ID Amazon2 Nautica",
+        "ID Alibaba Nautica",
+        "ID Akamai2 Nautica",
+        "ID PT Pusat Media Indonesia",
+        "ID Google Cloud",
+        "SG - M1",
+        "SG Godaddy.com",
+        "SG Vpls",
+        "SG Dromatics Systems Pte",
+        "SG Amazon.com",
+        "SG - Alibaba [VMess-TLS]",
+        "SG OHV",
+        "GB - Cloudflare Warp",
+        "SG Zenlayer",
+        "SG Alibaba Nautica",
+        "SG Eons Nautica",
+        "SG Melbikomas",
+        "SG Tencent Nautica"
+      ],
+      "url": "https://detectportal.firefox.com/success.txt",
+      "interval": "1m0s",
+      "tolerance": 50,
+      "idle_timeout": "5m0s"
+    },
+    {
+      "type": "selector",
+      "tag": "Region",
+      "outbounds": [
+        "SG 1",
+        "SG 2",
+        "SG 3",
+        "SG 4",
+        "ID 1 Yumi",
+        "ID 2 Yumi",
+        "Japan",
+        "Malaysia",
+        "CN",
+        "US"
+      ],
+      "default": "Singapur 2"
+    },
+    {
+      "type": "urltest",
+      "tag": "Load-balance",
+      "outbounds": [
+        "SG 1",
+        "SG 2",
+        "SG 3",
+        "SG 4",
+        "ID 1 Yumi",
+        "ID 2 Yumi",
+        "Japan",
+        "Malaysia",
+        "CN",
+        "US",
+        "ID Amazon Nautica",
+        "ID Akamai Nautica",
+        "ID Amazon2 Nautica",
+        "ID Alibaba Nautica",
+        "ID Akamai2 Nautica",
+        "ID PT Pusat Media Indonesia",
+        "ID Google Cloud",
+        "SG - M1",
+        "SG Godaddy.com",
+        "SG Vpls",
+        "SG Dromatics Systems Pte",
+        "SG Amazon.com",
+        "SG - Alibaba [VMess-TLS]",
+        "SG OHV",
+        "GB - Cloudflare Warp",
+        "SG Zenlayer",
+        "SG Alibaba Nautica",
+        "SG Eons Nautica",
+        "SG Melbikomas",
+        "SG Tencent Nautica"
+      ],
+      "url": "https://detectportal.firefox.com/success.txt",
+      "interval": "1m0s",
+      "tolerance": 50,
+      "idle_timeout": "5m0s"
+    },
+    {
+      "type": "selector",
+      "tag": "Ads-Ops",
+      "outbounds": [
+        "block",
+        "Internet"
+      ]
+    },
+    {
+      "type": "direct",
+      "tag": "direct-out"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    },
+    {
+      "password": "b93f5ca3-2bab-4038-a6f3-27be0addbddd",
+      "server": "nontontv.vidio.com",
+      "server_port": 80,
+      "tag": "SG 1",
+      "tls": {
+        "insecure": true,
+        "server_name": "yumiwolker.mayumiyui.workers.dev"
+      },
+      "transport": {
+        "headers": {
+          "Host": "yumiwolker.mayumiyui.workers.dev"
+        },
+        "path": "/152.69.221.114-23302",
+        "type": "ws"
+      },
+      "type": "trojan"
+    },
+    {
+      "password": "b93f5ca3-2bab-4038-a6f3-27be0addbddd",
+      "server": "nontontv.vidio.com",
+      "server_port": 80,
+      "tag": "SG 2",
+      "tls": {
+        "insecure": true,
+        "server_name": "yumiwolker.mayumiyui.workers.dev"
+      },
+      "transport": {
+        "headers": {
+          "Host": "yumiwolker.mayumiyui.workers.dev"
+        },
+        "path": "/15.235.199.103-2053",
+        "type": "ws"
+      },
+      "type": "trojan"
+    },
+    {
+      "method": "none",
+      "password": "b93f5ca3-2bab-4038-a6f3-27be0addbddd",
+      "plugin": "v2ray-plugin",
+      "plugin_opts": "tls;mux=0;mode=websocket;path=/146.235.19.79-28983;host=yumiwolker.mayumiyui.workers.dev",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "SG 3",
+      "type": "shadowsocks"
+    },
+    {
+      "method": "none",
+      "password": "b93f5ca3-2bab-4038-a6f3-27be0addbddd",
+      "plugin": "v2ray-plugin",
+      "plugin_opts": "tls;mux=0;mode=websocket;path=/15.235.199.103-8443;host=yumiwolker.mayumiyui.workers.dev",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "SG 4",
+      "type": "shadowsocks"
+    },
+    {
+      "server": "nontontv.vidio.com",
+      "server_port": 80,
+      "tag": "ID 1 Yumi",
+      "tls": {
+        "insecure": true
+      },
+      "transport": {
+        "headers": {
+          "Host": "nautica.vokip29018.workers.dev"
+        },
+        "path": "/8.215.196.18-587",
+        "type": "ws"
+      },
+      "type": "vless",
+      "uuid": "5d425ed2-d4b6-40f7-a40f-44306b096892"
+    },
+    {
+      "password": "5d425ed2-d4b6-40f7-a40f-44306b096892",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "ID 2 Yumi",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "nautica.vokip29018.workers.dev"
+      },
+      "transport": {
+        "headers": {
+          "Host": "nautica.vokip29018.workers.dev"
+        },
+        "path": "/172.232.239.151-587",
+        "type": "ws"
+      },
+      "type": "trojan"
+    },
+    {
+      "method": "none",
+      "password": "2bcfbfba-b446-4ad5-93ad-72af9e008f61",
+      "plugin": "v2ray-plugin",
+      "plugin_opts": "tls;mux=0;mode=websocket;path=/free/103.232.213.117:8080;host=nuclear.us.kg",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "Japan",
+      "type": "shadowsocks"
+    },
+    {
+      "method": "none",
+      "password": "2bcfbfba-b446-4ad5-93ad-72af9e008f61",
+      "plugin": "v2ray-plugin",
+      "plugin_opts": "tls;mux=0;mode=websocket;path=/free/172.93.165.228:443;host=nuclear.us.kg",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "Malaysia",
+      "type": "shadowsocks"
+    },
+    {
+      "method": "none",
+      "password": "2bcfbfba-b446-4ad5-93ad-72af9e008f61",
+      "plugin": "v2ray-plugin",
+      "plugin_opts": "tls;mux=0;mode=websocket;path=/free/156.230.12.71:443;host=nuclear.us.kg",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "CN",
+      "type": "shadowsocks"
+    },
+    {
+      "method": "none",
+      "password": "2bcfbfba-b446-4ad5-93ad-72af9e008f61",
+      "plugin": "v2ray-plugin",
+      "plugin_opts": "tls;mux=0;mode=websocket;path=/free/104.168.102.163:443;host=nuclear.us.kg",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "US",
+      "type": "shadowsocks"
+    },
+    {
+      "password": "5956b98c-c907-410e-81f3-442c85180916",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "ID Amazon Nautica",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "nautica.foolvpn.me"
+      },
+      "transport": {
+        "headers": {
+          "Host": "nautica.foolvpn.me"
+        },
+        "path": "/43.218.77.16-1443",
+        "type": "ws"
+      },
+      "type": "trojan"
+    },
+    {
+      "password": "5956b98c-c907-410e-81f3-442c85180916",
+      "server": "nontontv.vidio.com",
+      "server_port": 80,
+      "tag": "ID Akamai Nautica",
+      "tls": {
+        "insecure": true,
+        "server_name": "nautica.foolvpn.me"
+      },
+      "transport": {
+        "headers": {
+          "Host": "nautica.foolvpn.me"
+        },
+        "path": "/172.232.239.151-587",
+        "type": "ws"
+      },
+      "type": "trojan"
+    },
+    {
+      "method": "none",
+      "password": "5956b98c-c907-410e-81f3-442c85180916",
+      "plugin": "v2ray-plugin",
+      "plugin_opts": "tls;mux=0;mode=websocket;path=/43.218.77.16-443;host=nautica.foolvpn.me",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "ID Amazon2 Nautica",
+      "type": "shadowsocks"
+    },
+    {
+      "server": "nontontv.vidio.com",
+      "server_port": 80,
+      "tag": "ID Alibaba Nautica",
+      "tls": {
+        "insecure": true
+      },
+      "transport": {
+        "headers": {
+          "Host": "nautica.foolvpn.me"
+        },
+        "path": "/8.215.196.18-587",
+        "type": "ws"
+      },
+      "type": "vless",
+      "uuid": "5956b98c-c907-410e-81f3-442c85180916"
+    },
+    {
+      "method": "none",
+      "password": "5956b98c-c907-410e-81f3-442c85180916",
+      "plugin": "v2ray-plugin",
+      "plugin_opts": "tls;mux=0;mode=websocket;path=/172.232.237.112-2053;host=nautica.foolvpn.me",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "ID Akamai2 Nautica",
+      "type": "shadowsocks"
+    },
+    {
+      "security": "none",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "ID PT Pusat Media Indonesia",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "nuclear.us.kg"
+      },
+      "transport": {
+        "headers": {
+          "Host": "nuclear.us.kg"
+        },
+        "path": "/free/103.6.207.108:8080",
+        "type": "ws"
+      },
+      "type": "vmess",
+      "uuid": "2bcfbfba-b446-4ad5-93ad-72af9e008f61"
+    },
+    {
+      "security": "none",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "ID Google Cloud",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "nuclear.us.kg"
+      },
+      "transport": {
+        "headers": {
+          "Host": "nuclear.us.kg"
+        },
+        "path": "/free/34.101.247.19:53681",
+        "type": "ws"
+      },
+      "type": "vmess",
+      "uuid": "2bcfbfba-b446-4ad5-93ad-72af9e008f61"
+    },
+    {
+      "security": "zero",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "SG - M1",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "yumicftigarun.web.id"
+      },
+      "transport": {
+        "headers": {
+          "Host": "yumicftigarun.web.id"
+        },
+        "path": "/Yumi/143.42.66.91-443",
+        "type": "ws"
+      },
+      "type": "vmess",
+      "uuid": "3cdadfe3-c35d-4722-ba0a-d724b871bad4"
+    },
+    {
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "SG Godaddy.com",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "violetvpn.biz.id",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      },
+      "transport": {
+        "headers": {
+          "Host": "violetvpn.biz.id"
+        },
+        "path": "/sg-gody",
+        "type": "ws"
+      },
+      "type": "vless",
+      "uuid": "04adeecd-4f39-4f4d-a751-9bd76465deeb"
+    },
+    {
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "SG Vpls",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "violetvpn.biz.id",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      },
+      "transport": {
+        "headers": {
+          "Host": "violetvpn.biz.id"
+        },
+        "path": "/sg-vpls",
+        "type": "ws"
+      },
+      "type": "vless",
+      "uuid": "991ef5d5-495d-4729-b1cb-b17bff1dbc48"
+    },
+    {
+      "method": "none",
+      "password": "2bcfbfba-b446-4ad5-93ad-72af9e008f61",
+      "plugin": "v2ray-plugin",
+      "plugin_opts": "tls;mux=0;mode=websocket;path=/free/103.195.191.55:443;host=nuclear.us.kg",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "SG Dromatics Systems Pte",
+      "type": "shadowsocks"
+    },
+    {
+      "method": "none",
+      "password": "2bcfbfba-b446-4ad5-93ad-72af9e008f61",
+      "plugin": "v2ray-plugin",
+      "plugin_opts": "tls;mux=0;mode=websocket;path=/free/13.250.14.76:443;host=nuclear.us.kg",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "SG Amazon.com",
+      "type": "shadowsocks"
+    },
+    {
+      "security": "zero",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "SG - Alibaba [VMess-TLS]",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "akun.bansos.biz.id"
+      },
+      "transport": {
+        "headers": {
+          "Host": "akun.bansos.biz.id"
+        },
+        "path": "/Free/BitzBlack-VPN/47.236.181.185-8443",
+        "type": "ws"
+      },
+      "type": "vmess",
+      "uuid": "aaaaaaa1-bbbb-4ccc-accc-eeeeeeeeeee1"
+    },
+    {
+      "password": "aaaaaaa1-bbbb-4ccc-accc-eeeeeeeeeee1",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "SG OHV",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "akun.bansos.biz.id"
+      },
+      "transport": {
+        "headers": {
+          "Host": "akun.bansos.biz.id"
+        },
+        "path": "/Free/BitzBlack-VPN/51.79.158.58-8443",
+        "type": "ws"
+      },
+      "type": "trojan"
+    },
+    {
+      "security": "zero",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "GB - Cloudflare Warp",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "yumicftigarun.web.id"
+      },
+      "transport": {
+        "headers": {
+          "Host": "yumicftigarun.web.id"
+        },
+        "path": "/Yumi/185.127.17.214-4903",
+        "type": "ws"
+      },
+      "type": "vmess",
+      "uuid": "3cdadfe3-c35d-4722-ba0a-d724b871bad4"
+    },
+    {
+      "password": "6d414871-a32f-4fb3-8f0a-19d01495fdf1",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "SG Zenlayer",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "nautica.foolvpn.me"
+      },
+      "transport": {
+        "headers": {
+          "Host": "nautica.foolvpn.me"
+        },
+        "path": "/141.147.184.160-443",
+        "type": "ws"
+      },
+      "type": "trojan"
+    },
+    {
+      "password": "6d414871-a32f-4fb3-8f0a-19d01495fdf1",
+      "server": "nontontv.vidio.com",
+      "server_port": 80,
+      "tag": "SG Alibaba Nautica",
+      "tls": {
+        "insecure": true,
+        "server_name": "nautica.foolvpn.me"
+      },
+      "transport": {
+        "headers": {
+          "Host": "nautica.foolvpn.me"
+        },
+        "path": "/47.245.95.160-1443",
+        "type": "ws"
+      },
+      "type": "trojan"
+    },
+    {
+      "method": "none",
+      "password": "205bf94c-1506-4a88-952c-313f99003633",
+      "plugin": "v2ray-plugin",
+      "plugin_opts": "tls;mux=0;mode=websocket;path=/38.181.70.7-16240;host=nautica.foolvpn.me",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "SG Eons Nautica",
+      "type": "shadowsocks"
+    },
+    {
+      "method": "none",
+      "password": "205bf94c-1506-4a88-952c-313f99003633",
+      "plugin": "v2ray-plugin",
+      "plugin_opts": "tls;mux=0;mode=websocket;path=/91.192.81.154-2053;host=nautica.foolvpn.me",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "SG Melbikomas",
+      "type": "shadowsocks"
+    },
+    {
+      "method": "none",
+      "password": "9fa16541-fc4a-4343-a43f-8791ebdd0376",
+      "plugin": "v2ray-plugin",
+      "plugin_opts": "tls;mux=0;mode=websocket;path=/43.134.181.60-38371;host=nautica.foolvpn.me",
+      "server": "nontontv.vidio.com",
+      "server_port": 443,
+      "tag": "SG Tencent Nautica",
+      "type": "shadowsocks"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "protocol": "dns"
+          },
+          {
+            "port": 53
+          }
+        ],
+        "action": "hijack-dns"
+      },
+      {
+        "domain_regex": [
+          ".*ads.*",
+          ".*gacor.*"
+        ],
+        "rule_set": [
+          
+          "geosite-rule-ads",
+          "Ads-Adaway",
+          "Ads-Abpindo",
+          "Ads-PornIndo"
+        ],
+        "outbound": "Ads-Ops"
+      },
+      {
+        "domain": "youtube.com",
+        "geosite": "id",
+        "geoip": "id",
+        "outbound": "Internet"
+      },
+      {
+        "source_ip_cidr": [
+          "224.0.0.0/3",
+          "ff00::/8"
+        ],
+        "ip_cidr": [
+          "224.0.0.0/3",
+          "ff00::/8"
+        ],
+        "outbound": "block"
+      }
+    ],
+    "rule_set": [
+      
+      {
+        "type": "remote",
+        "tag": "geosite-rule-ads",
+        "format": "binary",
+        "url": "https://github.com/dickymuliafiqri/sing-box-examples/releases/download/latest/geosite-rule-ads.srs",
+        "download_detour": "Internet"
+      },
+      {
+        "type": "remote",
+        "tag": "Ads-Adaway",
+        "format": "binary",
+        "url": "https://github.com/Mayumiwandi/Lecilia/raw/refs/heads/main/Sing-box/adaway.srs",
+        "download_detour": "Internet"
+      },
+      {
+        "type": "remote",
+        "tag": "Ads-Abpindo",
+        "format": "binary",
+        "url": "https://github.com/Mayumiwandi/Lecilia/raw/refs/heads/main/Sing-box/abpindo.srs",
+        "download_detour": "Internet"
+      },
+      {
+        "type": "remote",
+        "tag": "Ads-PornIndo",
+        "format": "binary",
+        "url": "https://github.com/Mayumiwandi/Lecilia/raw/refs/heads/main/Sing-box/pornholeindo.srs",
+        "download_detour": "Internet"
+      }
+    ],
+    "final": "Internet",
+    "auto_detect_interface": true
+  },
+  "experimental": {
+    "clash_api": {
+      "external_controller": "0.0.0.0:9090",
+      "external_ui": "zashboard",
+      "external_ui_download_url": "https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip",
+      "external_ui_download_detour": "Internet",
+      "default_mode": "rule"
+    }
+  }
+}
