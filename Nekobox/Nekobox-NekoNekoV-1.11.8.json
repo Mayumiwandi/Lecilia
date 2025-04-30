@@ -1,0 +1,701 @@
+{
+  "log": {
+    "disabled": true,
+    "level": "debug",
+    "output": "/storage/emulated/0/Nekobox/singbox.log",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "remote-dns",
+        "address": "https://doh.tiarap.org/dns-query",
+        "address_resolver": "google-dns",
+        "address_strategy": "prefer_ipv4",
+        "strategy": "prefer_ipv4"
+      },
+      {
+        "tag": "google-dns",
+        "address": "https://8.8.8.8/dns-query",
+        "address_resolver": "dns-local",
+        "address_strategy": "prefer_ipv4",
+        "strategy": "prefer_ipv4"
+      },
+      {
+        "tag": "dns-local",
+        "address": "local",
+        "address_resolver": "local",
+        "address_strategy": "prefer_ipv4",
+        "strategy": "prefer_ipv4"
+      },
+      {
+        "tag": "local",
+        "address": "local"
+      },
+      {
+        "tag": "block-dns",
+        "address": "rcode://refused"
+      }
+    ],
+    "disable_cache": false,
+    "final": "dns-local",
+    "disable_expire": false,
+    "fakeip": {
+      "enabled": true,
+      "inet4_range": "198.18.0.1/16",
+      "inet6_range": "fc00::/18"
+    },
+    "rules": [
+      {
+        "domain_regex": [
+          "^stun\\..*"
+        ],
+        "package_name": [
+          "com.whatsapp"
+        ],
+        "port": [
+          3478
+        ],
+        "action": "route",
+        "server": "dns-local"
+      },
+      {
+        "domain": [
+          "quiz.int.vidio.com",
+          "plus-store.naver.com",
+          "ava.game.naver.com",
+          "investor.fb.com",
+          "quiz.vidio.com",
+          "investors.spotify.com",
+          "nontontv.vidio.com"
+        ],
+        "action": "route",
+        "server": "dns-local"
+      }
+    ]
+  },
+  "inbounds": [
+    {
+      "type": "direct",
+      "tag": "direct-in",
+      "listen": "0.0.0.0",
+      "listen_port": 6450,
+      "override_address": "8.8.8.8",
+      "override_port": 53,
+      "tcp_fast_open": true,
+      "tcp_multi_path": true,
+      "sniff": true,
+      "sniff_override_destination": true
+    },
+    {
+      "type": "mixed",
+      "tag": "mixed-in",
+      "listen": "0.0.0.0",
+      "listen_port": 2080,
+      "sniff": true,
+      "sniff_override_destination": true
+    },
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "address": [
+        "172.19.0.1/28",
+        "fdfe:dcba:9876::1/126"
+      ],
+      "mtu": 9000,
+      "auto_route": true,
+      "domain_strategy": "",
+      "endpoint_independent_nat": true,
+      "stack": "mixed",
+      "sniff": true,
+      "sniff_override_destination": true
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "direct-out",
+      "type": "direct"
+    },
+    {
+      "tag": "block",
+      "type": "block"
+    },
+    {
+      "outbounds": [
+        "SG Alibaba Nautica",
+        "ID Data Center nautica",
+        "ID Google Cloud",
+        "ID Alibaba Beatrice",
+        "Prod PT Pusat Media Indonesia",
+        "SG Oracle Beako"
+      ],
+      "tag": "Internet",
+      "type": "urltest",
+      "url": "http://www.gstatic.com/generate_204",
+      "idle_timeout": "5m",
+      "interval": "1m",
+      "tolerance": 50
+    },
+    {
+      "outbounds": [
+        "ID Akamai Yumi",
+        "SG OVHcloud",
+        "SG Melbi",
+        "ID Akamai Connected Cloud",
+        "ID Alibaba Bitz",
+        "SG [nautica]"
+      ],
+      "tag": "Best Latency",
+      "type": "urltest",
+      "url": "http://www.gstatic.com/generate_204",
+      "idle_timeout": "5m",
+      "interval": "1m",
+      "tolerance": 50
+    },
+    {
+      "tag": "Yumi-Internet",
+      "outbounds": [
+        "Converge ID [Yumi]",
+        "ID Akamai",
+        "GB Cloudflare Warp",
+        "ID PT Telkom Indonesia",
+        "ID Alibaba Nautica",
+        "US Cloudflare Warp"
+      ],
+      "type": "urltest",
+      "url": "http://www.gstatic.com/generate_204",
+      "idle_timeout": "5m",
+      "interval": "1m",
+      "tolerance": 50
+    },
+    {
+      "tag": "SG OVHcloud",
+      "type": "vmess",
+      "server": "plus-store.naver.com",
+      "server_port": 443,
+      "uuid": "9faf8d4c-aab1-4806-bb6f-1ab1bfa05ea4",
+      "security": "auto",
+      "alter_id": 0,
+      "tls": {
+        "enabled": true,
+        "server_name": "siren.nayumiwandi.workers.dev",
+        "insecure": true,
+        "disable_sni": false
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/15.235.199.103-2053",
+        "headers": {
+          "Host": "siren.nayumiwandi.workers.dev"
+        }
+      },
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      }
+    },
+    {
+      "tag": "SG Oracle Beako",
+      "type": "vmess",
+      "server": "plus-store.naver.com",
+      "server_port": 443,
+      "uuid": "2e33b06d-b99c-4940-be12-ad28c00ea34d",
+      "security": "auto",
+      "alter_id": 0,
+      "tls": {
+        "enabled": true,
+        "server_name": "beatrice.layanan-yumi.workers.dev",
+        "insecure": true,
+        "disable_sni": false
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/152.69.221.114-23302",
+        "headers": {
+          "Host": "beatrice.layanan-yumi.workers.dev"
+        }
+      },
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      }
+    },
+    {
+      "tag": "ID Alibaba Beatrice",
+      "type": "vmess",
+      "server": "plus-store.naver.com",
+      "server_port": 443,
+      "uuid": "2e33b06d-b99c-4940-be12-ad28c00ea34d",
+      "security": "auto",
+      "alter_id": 0,
+      "tls": {
+        "enabled": true,
+        "server_name": "beatrice.layanan-yumi.workers.dev",
+        "insecure": true,
+        "disable_sni": false
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/8.215.196.18-587",
+        "headers": {
+          "Host": "beatrice.layanan-yumi.workers.dev"
+        }
+      },
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      }
+    },
+    {
+      "tag": "SG [nautica]",
+      "type": "trojan",
+      "server": "plus-store.naver.com",
+      "server_port": 443,
+      "password": "5595bccd-e93d-4225-acd8-bd37973f1037",
+      "tls": {
+        "enabled": true,
+        "server_name": "nautica.foolvpn.me",
+        "insecure": true,
+        "disable_sni": false
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/167.71.194.185-8443",
+        "headers": {
+          "Host": "nautica.foolvpn.me"
+        }
+      },
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      }
+    },
+    {
+      "tag": "ID Google Cloud",
+      "type": "trojan",
+      "server": "plus-store.naver.com",
+      "server_port": 443,
+      "password": "56566956-a966-4985-8db0-ac4669be9578",
+      "tls": {
+        "enabled": true,
+        "server_name": "nuclear.biz.id",
+        "insecure": true,
+        "disable_sni": false
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/free/35.219.50.99:443",
+        "headers": {
+          "Host": "nuclear.biz.id"
+        }
+      },
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      }
+    },
+    {
+      "tag": "ID Akamai Yumi",
+      "type": "trojan",
+      "server": "plus-store.naver.com",
+      "server_port": 443,
+      "password": "47b0f65b-a97e-4166-937f-78f480108b0a",
+      "tls": {
+        "enabled": true,
+        "server_name": "yumiwolker.mayumiyui.workers.dev",
+        "insecure": true,
+        "disable_sni": false
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/172.235.251.7-587",
+        "headers": {
+          "Host": "yumiwolker.mayumiyui.workers.dev"
+        }
+      },
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      }
+    },
+    {
+      "tag": "SG Melbi",
+      "type": "vless",
+      "server": "plus-store.naver.com",
+      "server_port": 443,
+      "tls": {
+        "enabled": true,
+        "server_name": "violetvpn.biz.id",
+        "insecure": true,
+        "disable_sni": false
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/sg-melbi",
+        "headers": {
+          "Host": "violetvpn.biz.id"
+        }
+      },
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      },
+      "uuid": "52b3ce7f-afaa-430f-9493-1222a7fc25a2",
+      "flow": "",
+      "packet_encoding": "xudp"
+    },
+    {
+      "tag": "SG Alibaba Nautica",
+      "type": "trojan",
+      "server": "plus-store.naver.com",
+      "server_port": 443,
+      "password": "1ff7cd8c-1875-4c0b-bc4a-371eedc566e3",
+      "tls": {
+        "enabled": true,
+        "server_name": "nautica.foolvpn.me",
+        "insecure": true,
+        "disable_sni": false
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/47.74.254.191-8900",
+        "headers": {
+          "Host": "nautica.foolvpn.me"
+        }
+      },
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      }
+    },
+    {
+      "tag": "ID Alibaba Bitz",
+      "type": "vless",
+      "server": "plus-store.naver.com",
+      "server_port": 443,
+      "tls": {
+        "enabled": true,
+        "server_name": "free.c-stuff.net",
+        "insecure": true,
+        "disable_sni": false
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/Free/TG-at-BitzBlack/8.215.196.18-587",
+        "headers": {
+          "Host": "free.c-stuff.net"
+        }
+      },
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      },
+      "uuid": "aaaaaaa1-bbbb-4ccc-accc-eeeeeeeeeee1",
+      "flow": "",
+      "packet_encoding": "xudp"
+    },
+    {
+      "tag": "US Cloudflare Warp",
+      "type": "trojan",
+      "server": "plus-store.naver.com",
+      "server_port": 443,
+      "password": "74eaeab0-b357-43fb-862c-b8a271cd9554",
+      "tls": {
+        "enabled": true,
+        "server_name": "nuclear.biz.id",
+        "insecure": true,
+        "disable_sni": false
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/free/104.168.102.163:443",
+        "headers": {
+          "Host": "nuclear.biz.id"
+        }
+      },
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      }
+    },
+    {
+      "tag": "ID Akamai Connected Cloud",
+      "type": "vless",
+      "server": "plus-store.naver.com",
+      "server_port": 80,
+      "transport": {
+        "type": "ws",
+        "path": "/free/172.232.239.151:587",
+        "headers": {
+          "Host": "nuclear.biz.id"
+        }
+      },
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      },
+      "uuid": "0217f9e7-13ae-4560-aefd-90c8af48662c",
+      "flow": "",
+      "packet_encoding": "xudp"
+    },
+    {
+      "tag": "ID Akamai",
+      "type": "trojan",
+      "server": "plus-store.naver.com",
+      "server_port": 80,
+      "password": "aaaaaaa1-bbbb-4ccc-accc-eeeeeeeeeee1",
+      "transport": {
+        "type": "ws",
+        "path": "/Free/TG-at-BitzBlack/172.232.239.151-587",
+        "headers": {
+          "Host": "free.vpn-wuss.biz.id"
+        }
+      },
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      }
+    },
+    {
+      "tag": "ID Alibaba Nautica",
+      "type": "trojan",
+      "server": "plus-store.naver.com",
+      "server_port": 80,
+      "password": "a9c895ea-b5e1-4ab4-91ef-dc524070b46f",
+      "transport": {
+        "type": "ws",
+        "path": "/8.215.196.18-587",
+        "headers": {
+          "Host": "nautica.foolvpn.me"
+        }
+      },
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      }
+    },
+    {
+      "tag": "Converge ID [Yumi]",
+      "type": "trojan",
+      "server": "plus-store.naver.com",
+      "server_port": 443,
+      "password": "c41327e8-8e46-4c84-8de0-0530ee2fd640",
+      "tls": {
+        "enabled": true,
+        "server_name": "nautica.vokip29018.workers.dev",
+        "insecure": true,
+        "disable_sni": false
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/203.194.112.119-2053",
+        "headers": {
+          "Host": "nautica.vokip29018.workers.dev"
+        }
+      },
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      }
+    },
+    {
+      "tag": "GB Cloudflare Warp",
+      "type": "vless",
+      "server": "plus-store.naver.com",
+      "server_port": 443,
+      "tls": {
+        "enabled": true,
+        "server_name": "free.aloalo.my.id",
+        "insecure": true,
+        "disable_sni": false
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/Free/TG-at-XionAlva/185.127.17.163-4903",
+        "headers": {
+          "Host": "free.aloalo.my.id"
+        }
+      },
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      },
+      "uuid": "aaaaaaa1-bbbb-4ccc-accc-eeeeeeeeeee1",
+      "flow": "",
+      "packet_encoding": "xudp"
+    },
+    {
+      "tag": "ID PT Telkom Indonesia",
+      "type": "vless",
+      "server": "plus-store.naver.com",
+      "server_port": 80,
+      "transport": {
+        "type": "ws",
+        "path": "/Free/TG-at-BitzBlack/36.95.152.58-12137",
+        "headers": {
+          "Host": "free.bansos.biz.id"
+        }
+      },
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      },
+      "uuid": "aaaaaaa1-bbbb-4ccc-accc-eeeeeeeeeee1",
+      "flow": "",
+      "packet_encoding": "xudp"
+    },
+    {
+      "tag": "Prod PT Pusat Media Indonesia",
+      "type": "vless",
+      "server": "plus-store.naver.com",
+      "server_port": 80,
+      "transport": {
+        "type": "ws",
+        "path": "/free/103.6.207.108:8080",
+        "headers": {
+          "Host": "nuclear.biz.id"
+        }
+      },
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      },
+      "uuid": "95a55b4d-41a4-4f0c-8185-2ad0dd2b7d33",
+      "flow": "",
+      "packet_encoding": "xudp"
+    },
+    {
+      "tag": "ID Data Center nautica",
+      "type": "trojan",
+      "server": "plus-store.naver.com",
+      "server_port": 443,
+      "password": "bd865a1b-94aa-4d98-8059-f11c4b21e82e",
+      "tls": {
+        "enabled": true,
+        "server_name": "nautica.foolvpn.me",
+        "insecure": true,
+        "disable_sni": false
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/203.194.112.119-8443",
+        "headers": {
+          "Host": "nautica.foolvpn.me"
+        }
+      },
+      "multiplex": {
+        "enabled": false,
+        "protocol": "smux",
+        "max_streams": 32
+      }
+    }
+  ],
+  "route": {
+    "auto_detect_interface": true,
+    "rules": [
+      {
+        "outbound": "direct-out",
+        "port": [
+          53
+        ]
+      },
+      {
+        "inbound": [
+          "direct-in"
+        ],
+        "outbound": "direct-out"
+      },
+      {
+        "port": [
+          3478
+        ],
+        "ip_version": 4,
+        "network": [
+          "udp",
+          "tcp"
+        ],
+        "package_name": [
+          "com.whatsapp"
+        ],
+        "ip_cidr": [
+          "157.240.0.0/16",
+          "31.13.0.0/16"
+        ],
+        "outbound": "direct-out"
+      },
+      {
+        "ip_cidr": [
+          "224.0.0.0/3",
+          "ff00::/8"
+        ],
+        "outbound": "block",
+        "source_ip_cidr": [
+          "224.0.0.0/3",
+          "ff00::/8"
+        ]
+      },
+      {
+        "domain_suffix": [
+          "drive.google.com",
+          "googleusercontent.com",
+          "terabox.com",
+          "mega.nz",
+          "mediafire.com"
+        ],
+        "outbound": "Internet"
+      },
+      {
+        "package_name": [
+          "app.revanced.android.youtube"
+        ],
+        "port": [
+          80,
+          443
+        ],
+        "domain": [
+          "youtube.com"
+        ],
+        "geosite": [
+          "id"
+        ],
+        "geoip": [
+          "id"
+        ],
+        "action": "route",
+        "outbound": "Internet"
+      }
+    ],
+    "final": "Internet"
+  },
+  "experimental": {
+    "cache_file": {
+      "enabled": true,
+      "store_fakeip": true,
+      "store_rdrc": true
+    },
+    "clash_api": {
+      "external_controller": "127.0.0.1:9090",
+      "external_ui": "../files/yacd",
+      "external_ui_download_url": "https://github.com/MetaCubeX/Yacd-meta/archive/gh-pages.zip",
+      "access_control_allow_private_network": true,
+      "default_mode": "rule"
+    }
+  }
+}
