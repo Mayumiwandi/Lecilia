@@ -60,9 +60,7 @@
             {
                 "domain": [
                     
-                    "mayumi.biz.id",
-                    "mayumiyui.my.id",
-                    "yumicftigarun.web.id"
+                    
                 ],
                 "server": "google-dns",
                 "action": "route"
@@ -135,10 +133,8 @@
             "type": "urltest",
             "tag": "🚀 Latency",
             "outbounds": [
-                "siren nayumi vmess",
-                "shiroko vmess Linode",
-                "ID MITRA VISIONER Alya",
-                "ID Amazon layla"
+                
+
             ],
             "url": "https://connectivitycheck.gstatic.com/generate_204",
             "interval": "1m30s",
@@ -162,69 +158,7 @@
             "type": "block",
             "tag": "block"
         },
-        {
-            "type": "vless",
-            "tag": "natanvpn",
-            "tcp_fast_open": true,
-            "server": "support.vidio.com",
-            "server_port": 443,
-            "uuid": "66d5d1f2-c193-4bb7-9fb8-ba4c3306042b",
-            "tls": {
-                "enabled": true,
-                "server_name": "13.round.web.id",
-                "insecure": false,
-                "disable_sni": false
-            },
-            "transport": {
-                "type": "ws",
-                "path": "/vless",
-                "headers": {
-                    "Host": "13.round.web.id"
-                }
-            }
-        },
-        {
-            "type": "vmess",
-            "tag": "siren nayumi vmess",
-            "tcp_fast_open": true,
-            "server": "support.vidio.com",
-            "server_port": 443,
-            "uuid": "9faf8d4c-aab1-4806-bb6f-1ab1bfa05ea4",
-            "security": "zero",
-            "tls": {
-                "enabled": true,
-                "server_name": "siren.nayumiwandi.workers.dev",
-                "utls": {
-                    "enabled": true
-                }
-            },
-            "transport": {
-                "type": "ws",
-                "path": "/ID",
-                "headers": {
-                    "Host": "siren.nayumiwandi.workers.dev"
-                }
-            }
-        },
-        {
-            "type": "trojan",
-            "tag": "SG Shiroko Yumi",
-            "tcp_fast_open": true,
-            "server": "support.vidio.com",
-            "server_port": 443,
-            "password": "6affea6f-a412-44fa-8a9e-f2f1fb1f4fba",
-            "tls": {
-                "enabled": true,
-                "server_name": "shiroko.shirokoyumi.workers.dev"
-            },
-            "transport": {
-                "type": "ws",
-                "path": "/152.69.221.114-23302",
-                "headers": {
-                    "Host": "shiroko.shirokoyumi.workers.dev"
-                }
-            }
-        }
+        
     ],
     "route": {
         "rules": [
