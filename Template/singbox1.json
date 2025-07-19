@@ -1,0 +1,257 @@
+{
+    "log": {
+        "disabled": true,
+        "level": "debug",
+        "output": "Nekobox.log",
+        "timestamp": true
+    },
+    "dns": {
+        "servers": [
+            {
+                "tag": "google-dns",
+                "address": "tls://dns.google",
+                "address_resolver": "dns-local",
+                "address_strategy": "prefer_ipv4",
+                "strategy": "ipv4_only",
+                "detour": "🚀 Latency"
+            },
+            {
+                "tag": "cloudflare-dns",
+                "address": "https://cloudflare-dns.com/dns-query",
+                "address_resolver": "dns-local",
+                "address_strategy": "prefer_ipv4",
+                "strategy": "ipv4_only",
+                "detour": "🦈 Shark"
+            },
+            {
+                "tag": "dns-local",
+                "address": "local",
+                "address_resolver": "local",
+                "address_strategy": "prefer_ipv4",
+                "strategy": "ipv4_only"
+            },
+            {
+                "tag": "block-dns",
+                "address": "rcode://success",
+                "detour": "block"
+            }
+        ],
+        "rules": [
+            {
+                "domain": [
+                    "plus-store.naver.com",
+                    "ava.game.naver.com",
+                    "investor.fb.com",
+                    "investors.spotify.com",
+                    "nontontv.vidio.com",
+                    "support.vidio.com",
+                    "img.email2.vidio.com",
+                    "quiz.int.vidio.com",
+                    "quiz.vidio.com"
+                ],
+                "server": "dns-local"
+            },
+            {
+                "network": "udp",
+                "port": 443,
+                "action": "reject",
+                "method": "drop"
+            },
+            {
+                "domain": [
+                    
+                    "mayumi.biz.id",
+                    "mayumiyui.my.id",
+                    "yumicftigarun.web.id"
+                ],
+                "server": "google-dns",
+                "action": "route"
+            },
+            {
+                "outbound": "🚀 Latency",
+                "server": "google-dns",
+                "rewrite_ttl": 7200
+            },
+            {
+                "outbound": "🌐 Internet",
+                "server": "cloudflare-dns",
+                "rewrite_ttl": 7200
+            }
+        ],
+        "strategy": "ipv4_only",
+        "independent_cache": true
+    },
+    "inbounds": [
+        {
+            "type": "tun",
+            "tag": "tun-in",
+            "interface_name": "tunelm0n",
+            "mtu": 1590,
+            "address": [
+                "172.18.0.1/30",
+                "fdfe:dcba:9876::1/126"
+            ],
+            "auto_route": true,
+            "strict_route": true,
+            "stack": "gvisor",
+            "sniff": true,
+            "endpoint_independent_nat": true
+        },
+        {
+            "type": "mixed",
+            "tag": "mixed-in",
+            "listen": "0.0.0.0",
+            "listen_port": 2080,
+            "tcp_fast_open": true,
+            "sniff": true,
+            "sniff_override_destination": true
+        },
+        {
+            "type": "socks",
+            "tag": "socks-in",
+            "listen": "0.0.0.0",
+            "listen_port": 2082,
+            "tcp_fast_open": true
+        },
+        {
+            "type": "direct",
+            "tag": "direct-in",
+            "override_address": "112.215.203.246",
+            "override_port": 53
+        }
+    ],
+    "outbounds": [
+        {
+            "type": "selector",
+            "tag": "🌐 Internet",
+            "outbounds": [
+                "🚀 Latency",
+                "direct-out",
+                "Amazoncom Inc WS TLS [alya]"
+            ],
+            "default": "🚀 Latency"
+        },
+        {
+            "type": "urltest",
+            "tag": "🚀 Latency",
+            "outbounds": [
+                "siren nayumi vmess",
+                "shiroko vmess Linode"
+            ],
+            "url": "https://connectivitycheck.gstatic.com/generate_204",
+            "interval": "1m30s",
+            "tolerance": 60,
+            "idle_timeout": "5m0s"
+        },
+        {
+            "type": "direct",
+            "tag": "direct-out"
+        },
+        {
+            "type": "block",
+            "tag": "block"
+        },
+        {
+            "type": "vless",
+            "tag": "natanvpn",
+            "tcp_fast_open": true,
+            "server": "support.vidio.com",
+            "server_port": 443,
+            "uuid": "66d5d1f2-c193-4bb7-9fb8-ba4c3306042b",
+            "tls": {
+                "enabled": true,
+                "server_name": "13.round.web.id",
+                "insecure": false,
+                "disable_sni": false
+            },
+            "transport": {
+                "type": "ws",
+                "path": "/vless",
+                "headers": {
+                    "Host": "13.round.web.id"
+                }
+            }
+        },
+        {
+            "type": "shadowsocks",
+            "tag": "Amazoncom Inc WS TLS [alya]",
+            "server": "yumicftigarun.web.id",
+            "server_port": 443,
+            "method": "none",
+            "password": "34df5ecc-e516-4a2b-b122-c3a25206f418",
+            "plugin": "v2ray-plugin",
+            "plugin_opts": "mux=0;path=/43.218.77.16-443;host=yumicftigarun.web.id;tls=1"
+        },
+        {
+            "type": "vmess",
+            "tag": "siren nayumi vmess",
+            "tcp_fast_open": true,
+            "server": "support.vidio.com",
+            "server_port": 443,
+            "uuid": "9faf8d4c-aab1-4806-bb6f-1ab1bfa05ea4",
+            "security": "zero",
+            "tls": {
+                "enabled": true,
+                "server_name": "siren.nayumiwandi.workers.dev",
+                "utls": {
+                    "enabled": true
+                }
+            },
+            "transport": {
+                "type": "ws",
+                "path": "/ID",
+                "headers": {
+                    "Host": "siren.nayumiwandi.workers.dev"
+                }
+            }
+        },
+        {
+            "type": "trojan",
+            "tag": "SG Shiroko Yumi",
+            "tcp_fast_open": true,
+            "server": "support.vidio.com",
+            "server_port": 443,
+            "password": "6affea6f-a412-44fa-8a9e-f2f1fb1f4fba",
+            "tls": {
+                "enabled": true,
+                "server_name": "shiroko.shirokoyumi.workers.dev"
+            },
+            "transport": {
+                "type": "ws",
+                "path": "/152.69.221.114-23302",
+                "headers": {
+                    "Host": "shiroko.shirokoyumi.workers.dev"
+                }
+            }
+        }
+    ],
+    "route": {
+        "rules": [
+            {
+                "type": "logical",
+                "mode": "or",
+                "rules": [
+                    {
+                        "protocol": "dns"
+                    },
+                    {
+                        "port": 53
+                    }
+                ],
+                "action": "hijack-dns"
+            }
+        ],
+        "final": "🌐 Internet",
+        "auto_detect_interface": true
+    },
+    "experimental": {
+        "clash_api": {
+            "external_controller": "0.0.0.0:9090",
+            "external_ui": "dist",
+            "external_ui_download_url": "https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip",
+            "external_ui_download_detour": "🌐 Internet",
+            "default_mode": "rule",
+            "access_control_allow_origin": "*"
+        }
+    }
+}
