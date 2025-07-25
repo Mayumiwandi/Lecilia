@@ -50,7 +50,7 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           
           # Tambahkan file JSON yang baru dibuat/diperbarui ke staging area git
-          git rules/add whatsapp_rules.json
+          git add rules/whatsapp_rules.json
           
           # Cek apakah ada perubahan pada file yang di-stage.
           # Jika tidak ada perubahan, skrip akan berhenti di sini.
