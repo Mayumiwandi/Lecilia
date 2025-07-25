@@ -1,0 +1,66 @@
+# Nama workflow yang akan ditampilkan di tab Actions GitHub
+name: Update WhatsApp Rules Daily
+
+# Pemicu (trigger) untuk menjalankan workflow ini
+on:
+  # Memungkinkan Anda menjalankan workflow ini secara manual dari tab Actions
+  workflow_dispatch:
+
+  # Menjalankan workflow secara terjadwal
+  schedule:
+    # Menjalankan setiap hari pada pukul 00:00 UTC (sekitar jam 7 pagi WIB)
+    # Formatnya menggunakan cron job. '0 0 * * *' berarti menit 0, jam 0, setiap hari.
+    - cron: '0 0 * * *'
+
+jobs:
+  # Nama job yang akan dijalankan
+  update-rules:
+    # Menjalankan job ini di environment Ubuntu terbaru yang disediakan oleh GitHub
+    runs-on: ubuntu-latest
+
+    steps:
+      # Langkah 1: Checkout kode dari repositori Anda
+      # Langkah ini akan mengunduh kode Anda (termasuk skrip python) ke runner
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Langkah 2: Menyiapkan environment Python
+      # Menginstal Python versi 3.x yang stabil
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      # Langkah 3: Menginstal library yang dibutuhkan oleh skrip Python
+      # Dalam kasus ini, hanya library 'requests'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      # Langkah 4: Menjalankan skrip Python untuk mengambil data dan membuat file JSON
+      - name: Run Python script to update rules
+        run: python src/main.py
+
+      # Langkah 5: Commit dan Push file JSON yang diperbarui ke repositori jika ada perubahan
+      - name: Commit and push if there are changes
+        run: |
+          # Konfigurasi git dengan identitas bot agar jelas siapa yang melakukan commit
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # Tambahkan file JSON yang baru dibuat/diperbarui ke staging area git
+          git rules/add whatsapp_rules.json
+          
+          # Cek apakah ada perubahan pada file yang di-stage.
+          # Jika tidak ada perubahan, skrip akan berhenti di sini.
+          # Jika ada perubahan, skrip akan lanjut ke proses commit dan push.
+          if git diff --staged --quiet; then
+            echo "Tidak ada perubahan pada file aturan. Tidak perlu commit."
+          else
+            # Buat commit dengan pesan yang dinamis berisi tanggal dan waktu UTC
+            git commit -m "Update WhatsApp rules - $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+            # Push perubahan ke branch utama (main/master)
+            git push
+            echo "Perubahan telah di-commit dan di-push ke repositori."
+          fi
