@@ -18,29 +18,34 @@ jobs:
     # Menjalankan job ini di environment Ubuntu terbaru yang disediakan oleh GitHub
     runs-on: ubuntu-latest
 
+    # --- PERBAIKAN ---
+    # Memberikan izin tulis ke GITHUB_TOKEN agar bisa melakukan 'git push'
+    permissions:
+      contents: write
+
     steps:
       # Langkah 1: Checkout kode dari repositori Anda
-      # Langkah ini akan mengunduh kode Anda (termasuk skrip python) ke runner
       - name: Checkout repository
         uses: actions/checkout@v4
 
       # Langkah 2: Menyiapkan environment Python
-      # Menginstal Python versi 3.x yang stabil
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
       # Langkah 3: Menginstal library yang dibutuhkan oleh skrip Python
-      # Dalam kasus ini, hanya library 'requests'
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install requests
 
       # Langkah 4: Menjalankan skrip Python untuk mengambil data dan membuat file JSON
+      # Pastikan direktori 'rules' sudah ada atau dibuat oleh skrip
       - name: Run Python script to update rules
-        run: python src/main.py
+        run: |
+          mkdir -p rules
+          python src/main.py
 
       # Langkah 5: Commit dan Push file JSON yang diperbarui ke repositori jika ada perubahan
       - name: Commit and push if there are changes
@@ -53,8 +58,6 @@ jobs:
           git add rules/whatsapp_rules.json
           
           # Cek apakah ada perubahan pada file yang di-stage.
-          # Jika tidak ada perubahan, skrip akan berhenti di sini.
-          # Jika ada perubahan, skrip akan lanjut ke proses commit dan push.
           if git diff --staged --quiet; then
             echo "Tidak ada perubahan pada file aturan. Tidak perlu commit."
           else
